@@ -1,0 +1,104 @@
+@import "./svelte-tabs";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	@apply h-screen;
+}
+
+html,
+body {
+	@apply text-balc-gray bg-balc-white-brighter min-h-full font-mono;
+
+	& .dark {
+		@apply text-balc-white bg-balc-gray-darker;
+	}
+}
+
+hr {
+	@apply border-b border-t-0 border-gray-500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	@apply font-bold;
+}
+
+h4 {
+	@apply text-lg;
+}
+
+h3 {
+	@apply text-4xl;
+}
+
+h2 {
+	@apply text-6xl;
+}
+
+h1 {
+	@apply text-8xl;
+}
+
+// buttons
+
+button {
+	&:focus {
+		@apply outline-none;
+	}
+}
+
+.btn {
+	@apply font-bold py-1 px-2 rounded-sm border border-balc-white-hl text-gray-900 outline-none bg-transparent transition-all;
+
+	.dark & {
+		@apply border-balc-gray-hl text-balc-white;
+	}
+}
+
+.btn-balc-orange {
+	&:hover {
+		@apply bg-balc-orange;
+	}
+}
+
+.btn-balc-blue {
+	&:hover {
+		@apply bg-balc-blue;
+	}
+}
+
+// inputs
+
+input {
+	@apply text-balc-gray border border-balc-white-hl rounded-sm outline-none transition-all bg-transparent cursor-pointer appearance-none;
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+
+	.dark & {
+		@apply text-balc-white border-balc-gray-hl;
+	}
+
+	&:focus {
+		@apply ring-2 ring-balc-blue outline-none;
+	}
+}
+
+select {
+	@apply text-balc-gray border border-balc-white-hl rounded-sm outline-none appearance-none transition-all cursor-pointer bg-transparent;
+
+	.dark & {
+		@apply text-balc-white border-balc-gray-hl;
+	}
+
+	&:focus {
+		@apply ring-2 ring-balc-blue;
+	}
+}

@@ -1,0 +1,31 @@
+.svelte-tabs {
+	@apply border border-balc-white-hl py-2 px-6 bg-balc-white;
+
+	.dark & {
+		@apply border-balc-gray-hl bg-balc-gray;
+	}
+
+	.svelte-tabs__tab-list {
+		@apply border-b border-balc-white-hl;
+
+		.dark & {
+			@apply border-balc-gray-hl;
+		}
+	}
+
+	.svelte-tabs__tab {
+		@apply text-balc-gray cursor-pointer;
+
+		.dark & {
+			@apply text-balc-white;
+		}
+	}
+
+	.svelte-tabs__selected {
+		@apply font-bold border-0 border-b-2 border-balc-blue;
+	}
+
+	.svelte-tabs__tab-panel {
+		@apply m-0 py-8;
+	}
+}
