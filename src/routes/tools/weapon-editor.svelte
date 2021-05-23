@@ -95,7 +95,6 @@
 		<button class="btn btn-balc-blue h-10">
 			Export
 		</button>
-		<SelectInput bind:value={hide_invalid} options={bool_types} name="show-warnings" label="Hide Disabled Fields?" label_colour_class="text-balc-orange" />
 	</div>
 
 	<div class="px-8 py-3">
@@ -115,65 +114,68 @@
 					</TabList>
 
 					<TabPanel>
-						<FormGroup title="Name:">
-							<FloatLabelTextInput bind:value={the_weapon.name} name="name" label="Real Name" />
-							<FloatLabelTextInput bind:value={the_weapon.display_name} name="display-name" label="Display Name" />
-						</FormGroup>
-						<FormGroup title="StartWeaponConfig Params:">
-							<SelectInput bind:value={the_weapon.weapon_type} options={weapon_types} name="weapon-type" label="Weapon Type" />
-							<SelectInput bind:value={the_weapon.projectile_type} options={projectile_types} name="projectile-types" label="Projectile Type" />
-							<SelectInput bind:value={the_weapon.activation_context}
-										 options={activation_contexts}
-										 name="activation-contexts"
-										 label="Activation Context" />
-							<FloatLabelTextInput bind:value={the_weapon.projectile_speed} name="projectile-speed" label="Projectile Speed" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.range} name="range" label="Range" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.sphereburst_radius}
-												 name="sphereburst-radius"
-												 label="Sphereburst Radius"
-												 type="number"
-												 invalid={validation_warnings.sphereburst_radius}
-												 hide_if_invalid={hide_invalid} />
-							<FloatLabelTextInput bind:value={the_weapon.beam_duration}
-												 name="beam-duration"
-												 label="Beam Duration"
-												 type="number"
-												 invalid={validation_warnings.beam_duration}
-												 hide_if_invalid={hide_invalid} />
-							<FloatLabelTextInput bind:value={the_weapon.beam_anticipation_time}
-												 name="beam-anticipation-time"
-												 label="Beam Anticipation Time"
-												 type="number"
-												 invalid={validation_warnings.beam_anticipation_time}
-												 hide_if_invalid={hide_invalid} />
-							<FloatLabelTextInput bind:value={the_weapon.missile_fire_axis}
-												 name="missile-fire-axis"
-												 label="Missile Fire Axis"
-												 type="number"
-												 max={3}
-												 invalid={validation_warnings.missile_axis}
-												 hide_if_invalid={hide_invalid} />
-							<FloatLabelTextInput bind:value={the_weapon.max_effects} name="max-effects" label="Max Effects" type="number" />
-							<SelectInput bind:value={the_weapon.use_velocity_prediction} options={bool_types} name="use-velocity-prediction" label="Velocity Prediction?" />
-							<SelectInput bind:value={the_weapon.check_line_of_fire} options={bool_types} name="check-line-of-fire" label="Check Line of Fire?" />
-							<FloatLabelTextInput bind:value={the_weapon.shot_interval} name="shot-interval" label="Shot Interval" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.burst_duration} name="burst-duration" label="Burst Duration" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.burst_interval} name="burst-interval" label="Burst Interval" type="number" />
-							<SelectInput bind:value={the_weapon.shoot_at_secondaries} options={bool_types} name="shoot-at-secondaries" label="Shoot Secondaries?" />
-							<SelectInput bind:value={the_weapon.shoot_at_surroundings} options={bool_types} name="shoot-at-surroundings" label="Shoot Any Nearby?" />
-							<FloatLabelTextInput bind:value={the_weapon.tracking_speed_x} name="tracking-speed-x" label="Tracking Speed (Hor.)" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.tracking_speed_y} name="tracking-speed-y" label="Tracking Speed (Ver.)" type="number" />
-							<FloatLabelTextInput bind:value={the_weapon.speed_mult_when_over_target} name="speed-mult-when-over-target" label="Speed Mult. Over Target" type="number" />
-							<SelectInput bind:value={the_weapon.shield_penetration_mode} options={shield_pen_modes} name="shield-penetration-mode" label="Shield Pen. Mode" />
-							<SelectInput bind:value={the_weapon.track_outside_range} options={bool_types} name="track-outside-range" label="Track Outside Range?" />
-							<SelectInput bind:value={the_weapon.wait_for_codered} options={bool_types} name="wait-for-codered" label="Wait for Codered?" />
-							<FloatLabelTextInput bind:value={the_weapon.beam_penetration_threshold}
-												 name="beam-penetration-threshold"
-												 label="Beam Pen. Threshold"
-												 type="number"
-												 invalid={validation_warnings.beam_penetration_threshold}
-												 hide_if_invalid={hide_invalid} />
-						</FormGroup>
+						<div class="flex flex-col gap-4">
+							<SelectInput bind:value={hide_invalid} options={bool_types} name="show-warnings" label="Hide Disabled Fields?" label_colour_class="text-balc-orange" />
+							<FormGroup title="Name:">
+								<FloatLabelTextInput bind:value={the_weapon.name} name="name" label="Real Name" />
+								<FloatLabelTextInput bind:value={the_weapon.display_name} name="display-name" label="Display Name" />
+							</FormGroup>
+							<FormGroup title="StartWeaponConfig Params:">
+								<SelectInput bind:value={the_weapon.weapon_type} options={weapon_types} name="weapon-type" label="Weapon Type" />
+								<SelectInput bind:value={the_weapon.projectile_type} options={projectile_types} name="projectile-types" label="Projectile Type" />
+								<SelectInput bind:value={the_weapon.activation_context}
+											options={activation_contexts}
+											name="activation-contexts"
+											label="Activation Context" />
+								<FloatLabelTextInput bind:value={the_weapon.projectile_speed} name="projectile-speed" label="Projectile Speed" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.range} name="range" label="Range" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.sphereburst_radius}
+													name="sphereburst-radius"
+													label="Sphereburst Radius"
+													type="number"
+													invalid={validation_warnings.sphereburst_radius}
+													hide_if_invalid={hide_invalid} />
+								<FloatLabelTextInput bind:value={the_weapon.beam_duration}
+													name="beam-duration"
+													label="Beam Duration"
+													type="number"
+													invalid={validation_warnings.beam_duration}
+													hide_if_invalid={hide_invalid} />
+								<FloatLabelTextInput bind:value={the_weapon.beam_anticipation_time}
+													name="beam-anticipation-time"
+													label="Beam Anticipation Time"
+													type="number"
+													invalid={validation_warnings.beam_anticipation_time}
+													hide_if_invalid={hide_invalid} />
+								<FloatLabelTextInput bind:value={the_weapon.missile_fire_axis}
+													name="missile-fire-axis"
+													label="Missile Fire Axis"
+													type="number"
+													max={3}
+													invalid={validation_warnings.missile_axis}
+													hide_if_invalid={hide_invalid} />
+								<FloatLabelTextInput bind:value={the_weapon.max_effects} name="max-effects" label="Max Effects" type="number" />
+								<SelectInput bind:value={the_weapon.use_velocity_prediction} options={bool_types} name="use-velocity-prediction" label="Velocity Prediction?" />
+								<SelectInput bind:value={the_weapon.check_line_of_fire} options={bool_types} name="check-line-of-fire" label="Check Line of Fire?" />
+								<FloatLabelTextInput bind:value={the_weapon.shot_interval} name="shot-interval" label="Shot Interval" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.burst_duration} name="burst-duration" label="Burst Duration" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.burst_interval} name="burst-interval" label="Burst Interval" type="number" />
+								<SelectInput bind:value={the_weapon.shoot_at_secondaries} options={bool_types} name="shoot-at-secondaries" label="Shoot Secondaries?" />
+								<SelectInput bind:value={the_weapon.shoot_at_surroundings} options={bool_types} name="shoot-at-surroundings" label="Shoot Any Nearby?" />
+								<FloatLabelTextInput bind:value={the_weapon.tracking_speed_x} name="tracking-speed-x" label="Tracking Speed (Hor.)" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.tracking_speed_y} name="tracking-speed-y" label="Tracking Speed (Ver.)" type="number" />
+								<FloatLabelTextInput bind:value={the_weapon.speed_mult_when_over_target} name="speed-mult-when-over-target" label="Speed Mult. Over Target" type="number" />
+								<SelectInput bind:value={the_weapon.shield_penetration_mode} options={shield_pen_modes} name="shield-penetration-mode" label="Shield Pen. Mode" />
+								<SelectInput bind:value={the_weapon.track_outside_range} options={bool_types} name="track-outside-range" label="Track Outside Range?" />
+								<SelectInput bind:value={the_weapon.wait_for_codered} options={bool_types} name="wait-for-codered" label="Wait for Codered?" />
+								<FloatLabelTextInput bind:value={the_weapon.beam_penetration_threshold}
+													name="beam-penetration-threshold"
+													label="Beam Pen. Threshold"
+													type="number"
+													invalid={validation_warnings.beam_penetration_threshold}
+													hide_if_invalid={hide_invalid} />
+							</FormGroup>
+						</div>
 					</TabPanel>
 
 					<TabPanel>

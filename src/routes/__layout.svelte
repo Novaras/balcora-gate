@@ -1,10 +1,12 @@
 <script>
+	import '$styles/global.scss';
+
 	import NavBar from '$components/NavBar.svelte';
 </script>
 
 <NavBar />
 <slot></slot>
 
-<style lang="scss" global>
+<!-- <style lang="scss" global>
 	@import '../styles/global';
-</style>
+</style> -->

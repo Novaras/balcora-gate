@@ -17,6 +17,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@types/js-cookie": "^2.2.6",
+    "js-cookie": "^2.2.1",
     "svelte-tabs": "^1.1.0"
   }
 }
