@@ -1,7 +1,5 @@
 const production = !process.env.ROLLUP_WATCH;
 
-const shotgun = [/^bg-guidestone/];
-
 module.exports = {
   darkMode: 'class', // This can be 'media' if preferred.
   mode: 'jit',
@@ -41,5 +39,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: []
 }
