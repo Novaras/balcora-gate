@@ -6,7 +6,7 @@
 	}
 
 	.svelte-tabs__tab-list {
-		@apply border-b border-balc-white-hl;
+		@apply border-b border-balc-white-hl mb-4;
 
 		.dark & {
 			@apply border-balc-gray-hl;
@@ -26,6 +26,6 @@
 	}
 
 	.svelte-tabs__tab-panel {
-		@apply m-0 py-8;
+		@apply m-0 p-0;
 	}
 }
