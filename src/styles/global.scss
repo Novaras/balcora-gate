@@ -69,7 +69,7 @@ button {
 
 .btn-balc-blue {
 	&:hover {
-		@apply bg-balc-blue;
+		@apply bg-balc-blue text-balc-white;
 	}
 }
 
