@@ -10,11 +10,11 @@
 	$: block_class = block ? `flex` : `inline-flex`;
 </script>
 
-<div class="{ width } { block_class } flex-col items-center relative border border-balc-white-hl dark:border-balc-gray-hl mt-{h + 1}">
+<div class="{ width } { block_class } flex-col items-center relative border border-balc-white-hl dark:border-balc-gray-hl mt-4">
 	{#if title.length}
 		{@html header_html}
 	{/if}
-	<div class="h-full w-full pb-4 pt-6 px-8 flex flex-row flex-wrap gap-3">
+	<div class="h-full w-full pb-4 pt-6 px-8">
 		<slot></slot>
 	</div>
 </div>
