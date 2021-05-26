@@ -5,13 +5,8 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	export let options: {
-		display: string,
-		value: any,
-		parse?: (html_val: string) => any,
-		id: number | string
-	}[];
-	export let selected: any;
+	export let options: SelectOpt<unknown>[];
+	export let selected: SelectOpt<unknown>;
 	export let value: any;
 	export let allow_empty: boolean = true;
 	export let block: boolean = false;
@@ -45,6 +40,7 @@
 		selected = opt;
 		value = parse(target.value);
 		dispatch(`selected`, selected);
+		updateLabelBg();
 	};
 
 
@@ -55,6 +51,7 @@
 
 	// hack to ensure float labels have correct bg colour (same as closest parent with a set bg colour)
 	const updateLabelBg = async () => {
+		if (!label_el || !root_el) return;
 		const empty_bg_val = `rgba(0,0,0,0)`;
 		const findNearestWithBg = (el: HTMLElement) => {
 			const bg_colour = window.getComputedStyle(el).backgroundColor;
@@ -92,19 +89,20 @@
 
 {#if !(invalid && hide_if_invalid)}
 	<div class="relative { block ? `flex` : `inline-flex` } flex-col {width} my-2" bind:this={root_el}>
-		{#if label.length && has_value}
+
 			<label for={name}
 				   class="absolute left-2 transform -translate-y-1/2  px-1 text-sm font-bold {label_colour_class} z-10 transition-all"
+				   hidden={!has_value}
 				   bind:this={label_el}>
 				{ label }
 			</label>
-		{/if}
+
 		<div class="relative h-10">
 			<select class="w-full h-full px-3 {true ? input_ring_classes : `text-balc-gray dark:text-balc-white text-opacity-75 dark:text-opacity-75`}"
 					id={name}
 					on:input={doThing}>
-				{#if !has_value && allow_empty} <!-- here we hide the initial empty option -->
-					<option value={options[0]} hidden>
+				{#if !has_value}
+					<option value="" selected disabled>
 						{ options[0].display }...
 					</option>
 				{/if}
@@ -129,3 +127,15 @@
 		{/if}
 	</div>
 {/if}
+
+<style lang="scss">
+	select:invalid {
+		color: transparent;
+	}
+
+	select {
+		& option[value=""] {
+			color: transparent;
+		}
+	}
+</style>
