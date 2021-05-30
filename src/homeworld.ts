@@ -10,8 +10,6 @@ export const ShieldPenetrationModes = <const>[`normal`, `enhanced`,  `bypass`];
 export type ShieldPenetrationMode = typeof ShieldPenetrationModes[number];
 
 export interface Weapon {
-	name: string,
-	display_name: string,
 	weapon_type: WeaponType,
 	projectile_type: ProjectileType,
 	fire_script: string,
@@ -121,7 +119,7 @@ export interface WeaponExt extends Weapon {
 		target: typeof ResultTargets[number],
 		effect_min: number,
 		effect_max: number,
-		spawns_weapon?: string,
+		spawns_weapon: string,
 	},
 	accuracy: {
 		default: number,
@@ -170,6 +168,7 @@ export interface WeaponExt extends Weapon {
 	},
 	penetration: {
 		default: number,
+		field_pen: number,
 		exceptions?: ArmourFamilyExceptions
 	},
 	range_boost?: number,

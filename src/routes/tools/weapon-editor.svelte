@@ -23,6 +23,7 @@
 		ResultTargets,
 		MagneticFieldFamilies
 	} from '$src/homeworld';
+	import { objToWeaponLua } from '$lib/obj-to-lua';
 
 	// no impl for damage_falloff, frustrated_timers, stance_ranges, speed_accuracy_modifier
 	let the_weapon: Partial<WeaponExt> = {
@@ -55,14 +56,16 @@
 			default: 1
 		},
 		penetration: {
-			default: 1
+			default: 1,
+			field_pen: 5
 		},
 		weapon_result: {
 			condition: `hit`,
 			effect: `damagehealth`,
 			target: `target`,
 			effect_min: 0,
-			effect_max: 1
+			effect_max: 1,
+			spawns_weapon: ``, // even if empty, is needed
 		},
 		fire_angles: {
 			cone_radius: 45,
@@ -202,12 +205,6 @@
 					<TabPanel>
 						<div class="flex flex-col gap-4">
 							<SelectInput bind:value={hide_invalid} options={bool_types} name="show-warnings" label="Hide Disabled Fields?" label_colour_class="text-balc-orange" />
-							<FormGroup title="Name:">
-								<div class="flex flex-row flex-wrap gap-3">
-									<FloatLabelTextInput bind:value={the_weapon.name} name="name" label="Real Name" />
-									<FloatLabelTextInput bind:value={the_weapon.display_name} name="display-name" label="Display Name" />
-								</div>
-							</FormGroup>
 							<FormGroup title="StartWeaponConfig Params:">
 								<div class="flex flex-row flex-wrap gap-3">
 									<SelectInput bind:value={the_weapon.weapon_type} options={weapon_types} name="weapon-type" label="Weapon Type" />
@@ -289,11 +286,18 @@
 										bind:value={the_weapon.weapon_result.effect_min}
 										name="result-effect-min"
 										label="Min. Effect"
+										type="number"
 									/>
 									<FloatLabelTextInput
 										bind:value={the_weapon.weapon_result.effect_max}
 										name="result-effect-max"
 										label="Max. Effect"
+										type="number"
+									/>
+									<FloatLabelTextInput
+										bind:value={the_weapon.weapon_result.spawns_weapon}
+										name="result-spawns-weapon"
+										label="Spawns Weapon"
 									/>
 								</div>
 							</FormGroup>
@@ -304,6 +308,15 @@
 										name="penetration-default"
 										label="Default Penetration"
 										type="number"
+										min={0}
+									/>
+									<FloatLabelTextInput
+										bind:value={the_weapon.penetration.field_pen}
+										name="penetration-field"
+										label="Field Penetration"
+										type="number"
+										min={0}
+										max={100}
 									/>
 									{#each penetration_override_keys as override}
 										<FloatLabelTextInput
@@ -313,8 +326,8 @@
 											type="number"
 										/>
 									{/each}
-									{#if penetration_override_keys.length}
-										{#key penetration_override_keys.length}
+									{#if unassigned_penetration_overrides.length}
+										{#key unassigned_penetration_overrides.length}
 											<SelectInput
 												options={unassigned_penetration_overrides}
 												name="add-penetration-override"
@@ -341,8 +354,8 @@
 											type="number"
 										/>
 									{/each}
-									{#if accuracy_override_keys.length}
-										{#key accuracy_override_keys.length}
+									{#if unassigned_accuracy_overrides.length}
+										{#key unassigned_accuracy_overrides.length}
 											<SelectInput
 												options={unassigned_accuracy_overrides}
 												name="add-accuracy-override"
@@ -689,7 +702,11 @@
 			</TabPanel>
 			
 			<TabPanel>
-				LUA
+				<code>
+					<pre>
+						{ objToWeaponLua(the_weapon) }
+					</pre>
+				</code>
 			</TabPanel>
 		</Tabs>
 	</div>
