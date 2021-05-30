@@ -6,8 +6,8 @@
 	const dispatch = createEventDispatcher();
 
 	export let options: SelectOpt<unknown>[];
-	export let selected: SelectOpt<unknown>;
-	export let value: any;
+	export let selected: SelectOpt<unknown> | undefined = undefined;
+	export let value: any | undefined = undefined;
 	export let allow_empty: boolean = true;
 	export let block: boolean = false;
 	export let width: string = `w-64`;
