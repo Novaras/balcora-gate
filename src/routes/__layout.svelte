@@ -1,4 +1,5 @@
 <script>
+	import "@fontsource/roboto-mono";
 	import '$styles/global.scss';
 
 	import NavBar from '$components/NavBar.svelte';

@@ -4,13 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+// @font-face {
+// 	font-family: 'Roboto Mono';
+// 	src: url();
+// }
+
 html {
 	@apply h-screen;
 }
 
 html,
 body {
-	@apply text-balc-gray bg-balc-white-brighter min-h-full font-mono;
+	@apply text-balc-gray bg-balc-white-brighter min-h-full;
+	
+	font-family: "Roboto Mono", Consolas, sans-serif;
 
 	& .dark {
 		@apply text-balc-white bg-balc-gray-darker;
