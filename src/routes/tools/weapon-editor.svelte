@@ -1,10 +1,13 @@
 <script lang="ts">
+	// pkg
 	import { Tab, Tabs, TabList, TabPanel } from 'svelte-tabs';
 
+	// cmp
 	import FloatLabelTextInput from '$components/FloatLabelTextInput.svelte';
 	import SelectInput from '$components/SelectInput.svelte';
 	import FormGroup from '$components/FormGroup.svelte';
 
+	// defines
 	import type {
 		ArmourFamilyExceptions,
 		AttackFamilyExceptions,
@@ -23,7 +26,10 @@
 		ResultTargets,
 		MagneticFieldFamilies
 	} from '$src/homeworld';
+	
+	// lib/util
 	import { objToWeaponLua } from '$lib/obj-to-lua';
+	import download from '$src/lib/file-download';
 
 	// no impl for damage_falloff, frustrated_timers, stance_ranges, speed_accuracy_modifier
 	let the_weapon: Partial<WeaponExt> = {
@@ -168,6 +174,9 @@
 		missile_axis: validators.requiresProjectileType(`missile`),
 		sphereburst_radius: validators.requiresProjectileType(`sphereburst`)
 	};
+
+	// lua output:
+	$: lua_output = objToWeaponLua(the_weapon);
 </script>
 
 <section>
@@ -181,7 +190,7 @@
 		<button class="btn btn-balc-blue h-10">
 			Import
 		</button>
-		<button class="btn btn-balc-blue h-10">
+		<button class="btn btn-balc-blue h-10" on:click={() => download(lua_output)}>
 			Export
 		</button>
 	</div>
@@ -205,6 +214,9 @@
 					<TabPanel>
 						<div class="flex flex-col gap-4">
 							<SelectInput bind:value={hide_invalid} options={bool_types} name="show-warnings" label="Hide Disabled Fields?" label_colour_class="text-balc-orange" />
+							<FormGroup title="Name:">
+								<FloatLabelTextInput bind:value={the_weapon.name} name="name" label="Name" />
+							</FormGroup>
 							<FormGroup title="StartWeaponConfig Params:">
 								<div class="flex flex-row flex-wrap gap-3">
 									<SelectInput bind:value={the_weapon.weapon_type} options={weapon_types} name="weapon-type" label="Weapon Type" />
@@ -704,7 +716,7 @@
 			<TabPanel>
 				<code>
 					<pre>
-						{ objToWeaponLua(the_weapon) }
+						{ lua_output }
 					</pre>
 				</code>
 			</TabPanel>

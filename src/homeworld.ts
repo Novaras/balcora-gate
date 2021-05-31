@@ -112,6 +112,7 @@ export const ResultConditions = [`hit`, `miss`] as const;
 export const ResultTargets = [`target`, `owner`] as const; 
 
 export interface WeaponExt extends Weapon {
+	name?: string,
 	turret_sound?: string,
 	weapon_result: {
 		condition: typeof ResultConditions[number],
